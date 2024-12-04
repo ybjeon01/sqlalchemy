@@ -579,6 +579,7 @@ from .types import _OracleDate
 from .types import BFILE
 from .types import BINARY_DOUBLE
 from .types import BINARY_FLOAT
+from .types import BOOLEAN
 from .types import DATE
 from .types import FLOAT
 from .types import INTERVAL
@@ -670,6 +671,7 @@ ischema_names = {
     "BINARY_DOUBLE": BINARY_DOUBLE,
     "BINARY_FLOAT": BINARY_FLOAT,
     "ROWID": ROWID,
+    "BOOLEAN": BOOLEAN,
 }
 
 

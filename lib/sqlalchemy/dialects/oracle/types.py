@@ -285,6 +285,11 @@ class ROWID(sqltypes.TypeEngine):
     __visit_name__ = "ROWID"
 
 
+class BOOLEAN(sqltypes.BOOLEAN):
+    """Oracle Database BOOLEAN type."""
+    pass
+
+
 class _OracleBoolean(sqltypes.Boolean):
     def get_dbapi_type(self, dbapi):
         return dbapi.NUMBER
