@@ -753,6 +753,11 @@ class _OracleRowid(oracle.ROWID):
         return dbapi.ROWID
 
 
+class _OracleBoolean(oracle.BOOLEAN):
+    def get_dbapi_type(self, dbapi):
+        return dbapi.BOOLEAN
+
+
 class OracleCompiler_cx_oracle(OracleCompiler):
     _oracle_cx_sql_compiler = True
 
@@ -1061,6 +1066,7 @@ class OracleDialect_cx_oracle(OracleDialect):
             sqltypes.Date: _CXOracleDate,
             sqltypes.LargeBinary: _OracleBinary,
             sqltypes.Boolean: oracle._OracleBoolean,
+            oracle.BOOLEAN: _OracleBoolean,
             sqltypes.Interval: _OracleInterval,
             oracle.INTERVAL: _OracleInterval,
             sqltypes.Text: _OracleText,
@@ -1120,6 +1126,9 @@ class OracleDialect_cx_oracle(OracleDialect):
             self.colspecs = self.colspecs.copy()
             self.colspecs[sqltypes.Unicode] = _OracleUnicodeStringNCHAR
             self.colspecs[sqltypes.UnicodeText] = _OracleUnicodeTextNCLOB
+        if self.supports_native_boolean:
+            self.colspecs = self.colspecs.copy()
+            self.colspecs[sqltypes.Boolean] = _OracleBoolean
 
         dbapi_module = self.dbapi
         self._load_version(dbapi_module)
